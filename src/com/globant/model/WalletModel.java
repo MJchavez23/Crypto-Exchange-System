@@ -1,9 +1,8 @@
 package com.globant.model;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class Wallet {
+public class WalletModel {
     private String userId;
     private int balanceFiat;
     private Map<String, double[]> cryptoCurrencies;

@@ -5,5 +5,5 @@ public class UserModel {
     private String userName;
     private String email;
     private String password;
-    private Wallet wallet;
+    private WalletModel wallet;
 }
