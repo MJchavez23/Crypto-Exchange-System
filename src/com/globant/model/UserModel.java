@@ -1,6 +1,9 @@
 package com.globant.model;
 
 public class UserModel {
-    public static void main(String[] args) {
-    }
+    private String uniqueId;
+    private String userName;
+    private String email;
+    private String password;
+    private Wallet wallet;
 }
