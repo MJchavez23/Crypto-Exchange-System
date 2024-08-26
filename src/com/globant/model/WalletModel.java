@@ -8,6 +8,7 @@ import java.util.Map;
 
 
 public class WalletModel {
+
     private int userId;
     private double balanceFiat;
     private HashMap<String, Double> cryptoCurrencies;
