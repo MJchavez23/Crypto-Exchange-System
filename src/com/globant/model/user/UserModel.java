@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 
 public class UserModel {
 
-    private static final String CSV_FILE = "users.csv";
+    private static final String CSV_FILE = "src/com/globant/model/user/users.csv";
 
 
     public boolean registerUser(User user){
