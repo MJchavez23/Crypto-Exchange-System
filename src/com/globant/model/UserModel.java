@@ -3,7 +3,8 @@ package com.globant.model;
 import java.util.Random;
 
 public class UserModel {
-    private static final Random rand = new Random();
+
+    private static final String CSV_FILE = "users.csv";
 
     private int userId;
     private String userName;
@@ -17,5 +18,10 @@ public class UserModel {
         this.email = email;
         this.password = password;
         this.wallet = wallet;
+    }
+
+
+    public void register(){
+
     }
 }
