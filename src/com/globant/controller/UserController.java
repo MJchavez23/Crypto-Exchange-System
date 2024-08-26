@@ -24,12 +24,11 @@ public class UserController {
         HashMap<String, Double> cryptoCurrencies = new HashMap<>();
         cryptoCurrencies.put("BitCoin", 0.0);
         cryptoCurrencies.put("Ethereum", 0.0);
-        boolean newWallet = wallet.newWallet(newUserId, 0, cryptoCurrencies);
-
+        wallet.newWallet(newUserId, 0.0, cryptoCurrencies);
         User newUser = new User(newUserId, username, email, password);
-        boolean check = model.registerUser(newUser);
+        boolean result = model.registerUser(newUser);
 
-        return check;
+        return result;
     }
 
 }
