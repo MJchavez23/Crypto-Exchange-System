@@ -15,4 +15,20 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
