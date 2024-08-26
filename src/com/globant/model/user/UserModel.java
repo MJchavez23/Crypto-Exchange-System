@@ -10,8 +10,9 @@ public class UserModel {
 
 
     public boolean registerUser(User user){
-        try(PrintWriter pw = new PrintWriter(new FileWriter(CSV_FILE, true))) {
-            pw.printf("\\\"%d\\\",\\\"%s\\\",\\\"%s\\\",\\\"%s\\\"%n\"",
+        try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_FILE, true))) {
+            // Write user details to the CSV file without extra escaping
+            pw.printf("%d,\"%s\",\"%s\",\"%s\"%n",
                     user.getUserId(),
                     user.getUserName().replace("\"", "\"\""),
                     user.getEmail().replace("\"", "\"\""),
