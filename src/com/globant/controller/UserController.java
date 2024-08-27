@@ -28,7 +28,7 @@ public class UserController {
         try{
             if(!Objects.equals(username, "") && !Objects.equals(password, "") && !Objects.equals(email, "")){
                 register(username, password, email);
-            executeLogin();
+                executeLogin();
             }else{
                 view.showError("Register Error");
                 executeRegister();
