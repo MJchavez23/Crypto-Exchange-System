@@ -42,6 +42,14 @@ public class UserController {
 
     public void executeLogin(){
         List<String> data = view.loginPage();
+        String username = data.get(0);
+        String password = data.get(1);
+
+        if(!Objects.equals(username, "") && !Objects.equals(password, "")){
+            User newUser = model.loginUser(username, password);
+        }
+
+
     }
 
     public void register(String username, String password, String email){
