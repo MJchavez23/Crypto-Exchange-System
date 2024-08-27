@@ -30,7 +30,6 @@ public class ConsoleView {
     public List<String> loginPage(){
             try{
                 System.out.println("---- LOGIN PAGE ---");
-
                 System.out.print("Please enter your username: ");
                 String username = scanner.nextLine();
                 System.out.print("Please enter your password: ");
@@ -48,13 +47,10 @@ public class ConsoleView {
     public List<String> registrationPage(){
             try{
                 System.out.println("---- REGISTRATION PAGE ----");
-
                 System.out.print("Please enter your username: ");
                 String username = scanner.nextLine();
-
                 System.out.print("Please enter your password: ");
                 String password = scanner.nextLine();
-
                 System.out.print("Please enter your email: ");
                 String email = scanner.nextLine();
 

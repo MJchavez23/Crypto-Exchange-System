@@ -21,8 +21,11 @@ public class UserController {
 
     public void executeRegister(){
         List<String> data = view.registrationPage();
+        String username = data.get(0);
+        String password = data.get(1);
+        String email = data.get(2);
         try{
-            register(data.get(0), data.get(1), data.get(2));
+            register(username, password, email);
             executeLogin();
         }catch(Exception e){
             view.showError("Register Error");
