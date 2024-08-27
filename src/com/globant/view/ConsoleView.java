@@ -14,7 +14,9 @@ public class ConsoleView {
         System.out.println("----- WELCOME -----");
         System.out.println("CRYPTO EXCHANGE SYSTEM");
         System.out.println("1.LOGIN");
-        System.out.println("1.REGISTRATION");
+        System.out.println("2.REGISTRATION");
+        System.out.println("3.EXIT");
+        System.out.println("ENTER YOUR CHOICE: ");
         try{
             return this.scanner.nextInt();
         }catch(InputMismatchException e){
@@ -59,5 +61,5 @@ public class ConsoleView {
     }
 
     public void showError(String errorMessage) {System.out.println(errorMessage);}
-
+    public void close(){this.scanner.close();}
 }
