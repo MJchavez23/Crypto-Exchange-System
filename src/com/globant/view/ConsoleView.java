@@ -16,21 +16,25 @@ public class ConsoleView {
         System.out.println("1.LOGIN");
         System.out.println("2.REGISTRATION");
         System.out.println("3.EXIT");
-        System.out.println("ENTER YOUR CHOICE: ");
+        System.out.print("ENTER YOUR CHOICE: ");
         try{
-            return this.scanner.nextInt();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            return choice;
         }catch(InputMismatchException e){
-            this.scanner.nextLine();
+            scanner.nextLine();
             return -1;
         }
     }
 
     public List<String> loginPage(){
             try{
-                System.out.println("Please enter your username: ");
-                String username = this.scanner.nextLine();
-                System.out.println("Please enter your password: ");
-                String password = this.scanner.nextLine();
+                System.out.println("---- LOGIN PAGE ---");
+
+                System.out.print("Please enter your username: ");
+                String username = scanner.nextLine();
+                System.out.print("Please enter your password: ");
+                String password = scanner.nextLine();
                 List<String> data = new ArrayList<String>();
                 data.add(username);
                 data.add(password);
@@ -43,12 +47,17 @@ public class ConsoleView {
 
     public List<String> registrationPage(){
             try{
-                System.out.println("Please enter your username: ");
-                String username = this.scanner.nextLine();
-                System.out.println("Please enter your password: ");
-                String password = this.scanner.nextLine();
-                System.out.println("Please enter your email: ");
-                String email = this.scanner.nextLine();
+                System.out.println("---- REGISTRATION PAGE ----");
+
+                System.out.print("Please enter your username: ");
+                String username = scanner.nextLine();
+
+                System.out.print("Please enter your password: ");
+                String password = scanner.nextLine();
+
+                System.out.print("Please enter your email: ");
+                String email = scanner.nextLine();
+
                 List<String> data = new ArrayList<>();
                 data.add(username);
                 data.add(password);
