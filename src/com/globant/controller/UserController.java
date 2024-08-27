@@ -36,11 +36,8 @@ public class UserController {
     }
 
     public void register(String username, String password, String email){
-            int newUserId = rand.nextInt();
-            HashMap<String, Double> cryptoCurrencies = new HashMap<>();
-            cryptoCurrencies.put("BitCoin", 0.0);
-            cryptoCurrencies.put("Ethereum", 0.0);
-            wallet.newWallet(newUserId, 0.0, cryptoCurrencies);
+            int newUserId = rand.nextInt(Integer.MAX_VALUE) + 1;
+            wallet.newWallet(newUserId, 0.0);
             User newUser = new User(newUserId, username, email, password);
             model.registerUser(newUser);
     }
