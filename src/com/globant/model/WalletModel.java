@@ -16,7 +16,7 @@ public class WalletModel {
 
     public void newWallet(int userId, double balanceFiat){
         try(PrintWriter pw = new PrintWriter(new FileWriter(CSV_FILE, true))) {
-             pw.printf("%d, %.2f", userId, balanceFiat);
+             pw.printf("%d,%.2f", userId, balanceFiat);
              pw.print(",0,0");
              pw.println();
         } catch (IOException e) {
