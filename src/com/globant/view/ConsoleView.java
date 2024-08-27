@@ -39,4 +39,25 @@ public class ConsoleView {
             }
     }
 
+    public List<String> registrationPage(){
+            try{
+                System.out.println("Please enter your username: ");
+                String username = this.scanner.nextLine();
+                System.out.println("Please enter your password: ");
+                String password = this.scanner.nextLine();
+                System.out.println("Please enter your email: ");
+                String email = this.scanner.nextLine();
+                List<String> data = new ArrayList<>();
+                data.add(username);
+                data.add(password);
+                data.add(email);
+                return data;
+            }catch(InputMismatchException e) {
+                System.out.println("Invalid Data");
+                return registrationPage();
+            }
+    }
+
+    public void showError(String errorMessage) {System.out.println(errorMessage);}
+
 }
