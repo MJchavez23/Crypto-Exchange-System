@@ -1,5 +1,6 @@
 package com.globant.view;
 
+import com.globant.model.user.User;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -10,7 +11,7 @@ public class ConsoleView {
 
     public ConsoleView() {this.scanner = new Scanner(System.in);}
 
-    public int getUserChoice(){
+    public int getUserChoiceMain(){
         System.out.println("----- WELCOME -----");
         System.out.println("CRYPTO EXCHANGE SYSTEM");
         System.out.println("1.LOGIN");
@@ -26,6 +27,7 @@ public class ConsoleView {
             return -1;
         }
     }
+
 
     public List<String> loginPage(){
             try{
@@ -64,6 +66,11 @@ public class ConsoleView {
                 return registrationPage();
             }
     }
+
+    public void menuPage(User user){
+
+    }
+
 
     public void showError(String errorMessage) {System.out.println(errorMessage);}
     public void close(){this.scanner.close();}

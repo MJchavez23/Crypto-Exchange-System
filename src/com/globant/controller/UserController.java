@@ -5,6 +5,7 @@ import com.globant.model.user.User;
 import com.globant.model.user.UserModel;
 import com.globant.view.ConsoleView;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class UserController {
@@ -25,8 +26,14 @@ public class UserController {
         String password = data.get(1);
         String email = data.get(2);
         try{
-            register(username, password, email);
+            if(!Objects.equals(username, "") && !Objects.equals(password, "") && !Objects.equals(email, "")){
+                register(username, password, email);
             executeLogin();
+            }else{
+                view.showError("Register Error");
+                executeRegister();
+            }
+
         }catch(Exception e){
             view.showError("Register Error");
         }

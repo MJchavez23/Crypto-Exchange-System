@@ -16,7 +16,7 @@ public class RootController {
 
     public void run(){
         while(true){
-            int choice = view.getUserChoice();
+            int choice = view.getUserChoiceMain();
             switch(choice){
                 case 1:
                     this.userController.executeLogin();

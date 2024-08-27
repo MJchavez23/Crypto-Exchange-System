@@ -1,12 +1,10 @@
 package com.globant.model.user;
 
-import com.globant.model.WalletModel;
-
 public class User {
-    private int userId;
-    private String userName;
-    private String email;
-    private String password;
+    private final int userId;
+    private final String userName;
+    private final String email;
+    private final String password;
 
 
     public User(int userId, String userName, String email, String password) {
