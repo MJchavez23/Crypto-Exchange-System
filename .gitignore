@@ -1,5 +1,7 @@
 ### IntelliJ IDEA ###
 .idea/workspace.xml
+wallet.csv
+src/com/globant/model/user/users.csv
 .
 out/
 !**/src/main/**/out/
