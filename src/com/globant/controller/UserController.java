@@ -4,7 +4,6 @@ import com.globant.model.WalletModel;
 import com.globant.model.user.User;
 import com.globant.model.user.UserModel;
 import com.globant.view.ConsoleView;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -13,7 +12,7 @@ public class UserController {
     private final Random rand = new Random();
     private UserModel model;
     private WalletModel wallet;
-    private ConsoleView view;
+    private final ConsoleView view;
 
     public UserController(UserModel model, ConsoleView view) {
         this.view = view;
@@ -33,7 +32,7 @@ public class UserController {
 
 
     public void executeLogin(){
-
+        List<String> data = view.loginPage();
     }
 
     public void register(String username, String password, String email){
