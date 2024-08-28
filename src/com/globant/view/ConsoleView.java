@@ -28,7 +28,7 @@ public class ConsoleView {
         }
     }
 
-    public void getUserChoiceMenu(){
+    public int getUserChoiceMenu(){
         System.out.println("----- MENU -----");
         System.out.println("1.SHOW BALANCE");
         System.out.println("2.PLACE A SELL ORDER");
@@ -36,6 +36,16 @@ public class ConsoleView {
         System.out.println("4.LOGOUT");
         System.out.println("5.EXIT");
         System.out.print("ENTER YOUR CHOICE: ");
+
+        try{
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            return choice;
+        }catch (InputMismatchException e){
+            scanner.nextLine();
+            return -1;
+        }
     }
 
 
@@ -77,8 +87,11 @@ public class ConsoleView {
             }
     }
 
-    public void menuPage(User user){
-
+    public void balancePage(User user){
+        System.out.println("---- BALANCE PAGE ----");
+        System.out.println("Username: " + user.getUserName());
+        System.out.println("Email: " + user.getEmail());
+        //System.out.println("Balance: " + user.getBalance());
     }
 
 
