@@ -1,6 +1,5 @@
 package com.globant.controller;
 
-import com.globant.model.WalletModel;
 import com.globant.model.user.User;
 import com.globant.model.user.UserModel;
 import com.globant.view.ConsoleView;
@@ -11,13 +10,11 @@ import java.util.Random;
 public class UserController {
     private final Random rand = new Random();
     private final UserModel model;
-    private final WalletModel wallet;
     private final ConsoleView view;
 
     public UserController(UserModel model, ConsoleView view) {
         this.view = view;
         this.model = model;
-        this.wallet = new WalletModel();
     }
 
     public void executeRegister(){
@@ -47,6 +44,8 @@ public class UserController {
 
         if(!Objects.equals(username, "") && !Objects.equals(password, "")){
             User newUser = model.loginUser(username, password);
+            System.out.println(newUser.getUserName());
+            System.out.println(newUser.getWalletBalance());
         }
 
 
@@ -54,7 +53,6 @@ public class UserController {
 
     public void register(String username, String password, String email){
             int newUserId = rand.nextInt(Integer.MAX_VALUE) + 1;
-            wallet.newWallet(newUserId, 0.0);
             User newUser = new User(newUserId, username, email, password);
             model.registerUser(newUser);
     }
