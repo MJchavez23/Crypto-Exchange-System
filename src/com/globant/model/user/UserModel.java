@@ -1,55 +1,46 @@
 package com.globant.model.user;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import com.globant.model.CsvManager;
+import java.util.List;
 
 public class UserModel {
 
-    private static final String CSV_FILE = "src/com/globant/model/user/users.csv";
-
+    private final CsvManager csvManager = new CsvManager();
 
     public void registerUser(User user){
-        try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_FILE, true))) {
-            pw.printf("%d,\"%s\",\"%s\",\"%s\"%n",
-                    user.getUserId(),
-                    user.getUserName().replace("\"", "\"\""),
-                    user.getEmail().replace("\"", "\"\""),
-                    user.getPassword().replace("\"", "\"\""));
-        } catch (IOException e) {
-
-        }
+        int userId = user.getUserId();
+        String userName = user.getUserName();
+        String email = user.getEmail();
+        String password = user.getPassword();
+        csvManager.writeNewWallet(userId, 0.0);
+        csvManager.writeNewUser(userId,userName, email, password);
     }
 
 
     public User loginUser(String username, String password){
-        try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE))) {
-            String line;
-            while ((line = br.readLine()) != null) {
+        List<String> data = csvManager.checkUser(username, password);
+        int newUserId = Integer.parseInt(data.get(0));
+        String newUserName = data.get(1);
+        String newPassword = data.get(2);
+        String newEmail = data.get(3);
+        User newUser = new User(newUserId, newUserName, newEmail, newPassword);
 
-                String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-
-                if (parts.length >= 4) {
-                    String csvUserId = parts[0].replace("\"", "");
-                    String csvUsername = parts[1].replace("\"", "");
-                    String csvPassword = parts[2].replace("\"", "");
-                    String csvEmail = parts[3].replace("\"", "");
+        String[] newWallet = csvManager.getWallet(newUserId);
+        int walletUserId = Integer.parseInt(newWallet[0]);
+        double walletBalance = Double.parseDouble(newWallet[1]);
+        newUser.setWallet(walletUserId, walletBalance);
 
 
-                    if (username.equals(csvUsername) && password.equals(csvPassword)) {
-                        int userId = Integer.parseInt(csvUserId);
-                        User newUser = new User(userId, csvUsername, csvEmail, csvPassword);
-                        return newUser;
-                    }
-                }
-            }
-        } catch (IOException e) {
 
-        }
 
-        System.out.println("User dont match");
-        return null;
+        return newUser;
+//        String[] walletData = wallet.getWalletById(userId);
+//        int walletUserId = Integer.parseInt(walletData[0]);
+//        double walletBalance = Double.parseDouble(walletData[1]);
+//
+//        User newUser = new User(userId, csvUsername, csvEmail, csvPassword);
+//        newUser.setWallet(walletUserId, walletBalance);
+//        return newUser;
+
     }
 }
