@@ -1,8 +1,7 @@
 package com.globant;
 
 import com.globant.controller.RootController;
-import com.globant.controller.UserController;
-import com.globant.model.WalletModel;
+import com.globant.model.wallet.WalletModel;
 import com.globant.model.user.UserModel;
 import com.globant.view.ConsoleView;
 
