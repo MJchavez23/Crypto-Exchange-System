@@ -13,4 +13,8 @@ public class Wallet {
         this.balanceFiat = balanceFiat;
         this.cryptoCurrencies = new HashMap<>();
     }
+
+    public double getBalanceFiat() {
+        return balanceFiat;
+    }
 }
