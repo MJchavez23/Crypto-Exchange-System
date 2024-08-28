@@ -1,6 +1,6 @@
 package com.globant.controller;
 
-import com.globant.model.WalletModel;
+import com.globant.model.wallet.WalletModel;
 import com.globant.model.user.UserModel;
 import com.globant.view.ConsoleView;
 
@@ -10,8 +10,8 @@ public class RootController {
     private final ConsoleView view;
     public RootController(UserModel userModel, WalletModel walletModel, ConsoleView view){
         this.view = view;
-        this.userController = new UserController(userModel, view);
-        this.walletController = new WalletController(walletModel, view);
+        userController = new UserController(userModel, view);
+        walletController = new WalletController(walletModel, view);
     }
 
     public void run(){
