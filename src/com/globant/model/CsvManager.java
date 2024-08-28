@@ -62,4 +62,20 @@ public class CsvManager {
 
         }
     }
+
+
+    public String[] getWallet(int userId){
+        try(BufferedReader br = new BufferedReader(new FileReader(CSV_WALLET_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[0].equals(String.valueOf(userId))) {
+                    return line.split(",");
+                }
+            }
+        } catch (IOException e) {
+
+        }
+        return null;
+    }
 }
