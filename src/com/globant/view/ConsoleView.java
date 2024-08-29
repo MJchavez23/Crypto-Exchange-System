@@ -1,8 +1,5 @@
 package com.globant.view;
 
-import com.globant.model.user.User;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;

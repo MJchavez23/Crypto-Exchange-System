@@ -1,11 +1,9 @@
 package com.globant.controller;
 
 import com.globant.model.user.User;
-import com.globant.model.user.UserModel;
 import com.globant.service.UserService;
 import com.globant.view.ConsoleView;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class UserController {

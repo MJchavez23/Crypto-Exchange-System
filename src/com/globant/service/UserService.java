@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class UserService {
     private final Random rand = new Random();
-    private UserModel model;
+    private final UserModel model;
 
     public UserService(){
         model = new UserModel();
@@ -20,7 +20,7 @@ public class UserService {
                 return model.loginUser(username, password);
             }
         }catch(Exception e){
-
+            return null;
         }
         return null;
     }
