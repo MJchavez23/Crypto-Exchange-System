@@ -86,13 +86,21 @@ public class ConsoleView {
             }
     }
 
-    public void balancePage(User user){
+    public int balancePage(double balance, String userName){
         System.out.println("---- BALANCE PAGE ----");
-        System.out.println("Username: " + user.getUserName());
-        System.out.println("Email: " + user.getEmail());
-        //System.out.println("Balance: " + user.getBalance());
-    }
+        System.out.println("Username: " + userName);
+        System.out.println("Balance: " + balance);
+        System.out.println("1.Go back");
+        try{
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            return choice;
+        }catch (InputMismatchException e){
+            scanner.nextLine();
+            return -1;
+        }
 
+    }
 
     public void showError(String errorMessage) {System.out.println(errorMessage);}
     public void close(){this.scanner.close();}
