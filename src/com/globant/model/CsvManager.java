@@ -42,9 +42,6 @@ public class CsvManager {
                         data.add(csvEmail);
                         return data;
                     }
-                    else {
-                        return null;
-                    }
                 }
             }
         } catch (IOException e) {
