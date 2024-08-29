@@ -34,7 +34,6 @@ public class ConsoleView {
         System.out.println("3.PLACE A SELL ORDER");
         System.out.println("4.PLACE A BUY ORDER");
         System.out.println("5.LOGOUT");
-        System.out.println("6.EXIT");
         System.out.print("ENTER YOUR CHOICE: ");
 
         try{
@@ -100,6 +99,20 @@ public class ConsoleView {
             return -1;
         }
 
+    }
+
+
+    public double depositPage(){
+        System.out.println("---- DEPOSIT PAGE ----");
+        System.out.println("How much do you want to deposit?: ");
+        try{
+            double amount = scanner.nextInt();
+            scanner.nextLine();
+            return amount;
+        }catch (InputMismatchException e){
+            scanner.nextLine();
+            return 0;
+        }
     }
 
     public void showError(String errorMessage) {System.out.println(errorMessage);}
