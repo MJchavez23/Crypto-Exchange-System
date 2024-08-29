@@ -55,14 +55,16 @@ public class RootController {
                     }
                     break;
 
+                case 2:
+                    userController.executeDeposit();
+                    showMenuPage();
+                    break;
+
                 case 5:
                     userController.executeLogOut();
                     run();
                     break;
 
-                case 6:
-                    System.exit(0);
-                    break;
 
             }
         }
