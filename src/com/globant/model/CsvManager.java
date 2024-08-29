@@ -75,4 +75,57 @@ public class CsvManager {
         }
         return null;
     }
+
+
+    public void updateBalance(int userId, double newBalance) {
+            List<String> lines = new ArrayList<>();
+        boolean updated = false;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_WALLET_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                if (parts.length >= 4) {
+                    String csvUserIdStr = parts[0].replace("\"", "").trim();
+                    int csvUserId;
+                    try {
+                        csvUserId = Integer.parseInt(csvUserIdStr);
+                    } catch (NumberFormatException e) {
+                        // Skip lines with invalid userId
+                        lines.add(line);
+                        continue;
+                    }
+
+                    if (userId == csvUserId) {
+                        // Update only the balance
+                        lines.add(String.format("%d,%.2f,%s,%s",
+                            csvUserId, newBalance, parts[2], parts[3]));
+                        updated = true;
+                    } else {
+                        // Keep the existing line
+                        lines.add(line);
+                    }
+                } else {
+                    // Keep lines with less data
+                    lines.add(line);
+                }
+            }
+
+        } catch (IOException e) {
+        }
+
+        // Write the updated lines back to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_WALLET_FILE))) {
+            for (String updatedLine : lines) {
+                writer.write(updatedLine);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+        }
+
+
+    }
+
+
 }
