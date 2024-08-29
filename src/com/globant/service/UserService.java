@@ -10,6 +10,7 @@ public class UserService {
     private final Random rand = new Random();
     private final UserModel model;
 
+
     public UserService(){
         model = new UserModel();
     }
@@ -32,5 +33,16 @@ public class UserService {
                 model.registerUser(newUser);
             }
 
+    }
+
+
+    public void deposit(double amount, User user){
+        if(amount > 0){
+            user.depositFiat(amount);
+        }
+    }
+
+    public void logOut(User user){
+        model.logOut(user.getUserId(), user.getWalletBalance());
     }
 }
