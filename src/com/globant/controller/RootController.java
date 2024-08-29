@@ -2,15 +2,18 @@ package com.globant.controller;
 
 import com.globant.model.wallet.WalletModel;
 import com.globant.model.user.UserModel;
+import com.globant.service.UserService;
 import com.globant.view.ConsoleView;
 
 public class RootController {
     private final UserController userController;
     private final WalletController walletController;
     private final ConsoleView view;
-    public RootController(UserModel userModel, WalletModel walletModel, ConsoleView view){
+
+
+    public RootController(UserService userService, WalletModel walletModel, ConsoleView view){
         this.view = view;
-        userController = new UserController(userModel, view);
+        userController = new UserController(userService, view);
         walletController = new WalletController(walletModel, view);
     }
 
@@ -19,10 +22,11 @@ public class RootController {
             int choice = view.getUserChoiceMain();
             switch(choice){
                 case 1:
-                    this.userController.executeLogin();
+                    checkLogin();
                     break;
                 case 2:
-                    this.userController.executeRegister();
+                    userController.executeRegister();
+                    checkLogin();
                     break;
                 case 3:
                     System.exit(0);
@@ -32,5 +36,37 @@ public class RootController {
         }
     }
 
+    public void checkLogin(){
+        int result = userController.executeLogin();
+        if (result == 1){
+            showMenuPage();
+        }else{
+            run();
+        }
+    }
+
+    public void showMenuPage(){
+        while(true){
+            int choice = view.getUserChoiceMenu();
+            switch(choice){
+                case 1:
+                    int choice2 = userController.executeBalance();
+                    if(choice2 == 1){
+                        showMenuPage();
+                    }
+                    break;
+
+                case 5:
+                    userController.executeLogOut();
+                    run();
+                    break;
+
+                case 6:
+                    System.exit(0);
+                    break;
+
+            }
+        }
+    }
 
 }
