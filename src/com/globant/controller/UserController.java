@@ -52,8 +52,14 @@ public class UserController {
         return -1;
      }
 
+     public void executeDeposit(){
+        double amount = view.depositPage();
+        userService.deposit(amount, user);
+     }
+
 
      public void executeLogOut(){
+        userService.logOut(user);
         user = null;
      }
 
