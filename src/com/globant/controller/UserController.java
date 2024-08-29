@@ -44,10 +44,8 @@ public class UserController {
 
         if(!Objects.equals(username, "") && !Objects.equals(password, "")){
             user = model.loginUser(username, password);
-
+            executeMenu();
         }
-
-
     }
 
     public void register(String username, String password, String email){
@@ -55,5 +53,31 @@ public class UserController {
             User newUser = new User(newUserId, username, email, password);
             model.registerUser(newUser);
     }
+
+     public void executeMenu(){
+        int choice = view.getUserChoiceMenu();
+        switch(choice){
+            case 1:
+                executeBalance();
+            case 4:
+                executeLogOut();
+            case 5:
+                System.exit(0);
+
+        }
+     }
+
+
+     public void executeBalance(){
+        int choice = view.balancePage(user.getWalletBalance(), user.getUserName());
+        if (choice == 1){
+            executeMenu();
+        }
+     }
+
+     public void executeLogOut(){
+        user = null;
+        view.getUserChoiceMain();
+     }
 
 }
