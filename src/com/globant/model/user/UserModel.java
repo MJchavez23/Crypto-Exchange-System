@@ -31,13 +31,10 @@ public class UserModel {
         newUser.setWallet(walletUserId, walletBalance);
 
         return newUser;
-//        String[] walletData = wallet.getWalletById(userId);
-//        int walletUserId = Integer.parseInt(walletData[0]);
-//        double walletBalance = Double.parseDouble(walletData[1]);
-//
-//        User newUser = new User(userId, csvUsername, csvEmail, csvPassword);
-//        newUser.setWallet(walletUserId, walletBalance);
-//        return newUser;
 
+    }
+
+    public void logOut(int userid, double balance){
+        csvManager.updateBalance(userid, balance);
     }
 }
