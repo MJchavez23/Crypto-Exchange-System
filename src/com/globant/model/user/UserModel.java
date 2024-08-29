@@ -30,9 +30,6 @@ public class UserModel {
         double walletBalance = Double.parseDouble(newWallet[1]);
         newUser.setWallet(walletUserId, walletBalance);
 
-
-
-
         return newUser;
 //        String[] walletData = wallet.getWalletById(userId);
 //        int walletUserId = Integer.parseInt(walletData[0]);
