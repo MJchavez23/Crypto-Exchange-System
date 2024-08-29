@@ -1,6 +1,8 @@
 package com.globant.view;
 
 import com.globant.model.user.User;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -31,10 +33,11 @@ public class ConsoleView {
     public int getUserChoiceMenu(){
         System.out.println("----- MENU -----");
         System.out.println("1.SHOW BALANCE");
-        System.out.println("2.PLACE A SELL ORDER");
-        System.out.println("3.PLACE A BUY ORDER");
-        System.out.println("4.LOGOUT");
-        System.out.println("5.EXIT");
+        System.out.println("2.Deposit Fiat ($)");
+        System.out.println("3.PLACE A SELL ORDER");
+        System.out.println("4.PLACE A BUY ORDER");
+        System.out.println("5.LOGOUT");
+        System.out.println("6.EXIT");
         System.out.print("ENTER YOUR CHOICE: ");
 
         try{
