@@ -2,6 +2,7 @@ package com.globant.controller;
 
 import com.globant.model.user.User;
 import com.globant.model.user.UserModel;
+import com.globant.service.UserService;
 import com.globant.view.ConsoleView;
 import java.util.List;
 import java.util.Objects;
@@ -9,12 +10,13 @@ import java.util.Random;
 
 public class UserController {
     private final Random rand = new Random();
-    private final UserModel model;
+    private final UserService userService;
     private final ConsoleView view;
     private User user;
-    public UserController(UserModel model, ConsoleView view) {
+
+    public UserController(UserService userService, ConsoleView view) {
         this.view = view;
-        this.model = model;
+        this.userService = userService;
     }
 
     public void executeRegister(){
@@ -23,61 +25,41 @@ public class UserController {
         String password = data.get(1);
         String email = data.get(2);
         try{
-            if(!Objects.equals(username, "") && !Objects.equals(password, "") && !Objects.equals(email, "")){
-                register(username, password, email);
-                executeLogin();
-            }else{
-                view.showError("Register Error");
-                executeRegister();
-            }
-
+            userService.register(username, password, email);
         }catch(Exception e){
             view.showError("Register Error");
         }
     }
 
 
-    public void executeLogin(){
+    public int executeLogin(){
         List<String> data = view.loginPage();
         String username = data.get(0);
         String password = data.get(1);
-
-        if(!Objects.equals(username, "") && !Objects.equals(password, "")){
-            user = model.loginUser(username, password);
-            executeMenu();
+        user = userService.login(username, password);
+        if(user == null){
+            view.showError("Login Error");
+            return -1;
+        }else{
+            return 1;
         }
     }
 
-    public void register(String username, String password, String email){
-            int newUserId = rand.nextInt(Integer.MAX_VALUE) + 1;
-            User newUser = new User(newUserId, username, email, password);
-            model.registerUser(newUser);
-    }
 
-     public void executeMenu(){
-        int choice = view.getUserChoiceMenu();
-        switch(choice){
-            case 1:
-                executeBalance();
-            case 4:
-                executeLogOut();
-            case 5:
-                System.exit(0);
-
-        }
-     }
-
-
-     public void executeBalance(){
+     public int executeBalance(){
         int choice = view.balancePage(user.getWalletBalance(), user.getUserName());
         if (choice == 1){
-            executeMenu();
+            return 1;
         }
+        return -1;
      }
+
 
      public void executeLogOut(){
         user = null;
-        view.getUserChoiceMain();
      }
+
+
+
 
 }
