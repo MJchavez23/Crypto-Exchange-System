@@ -11,7 +11,7 @@ public class UserController {
     private final Random rand = new Random();
     private final UserModel model;
     private final ConsoleView view;
-
+    private User user;
     public UserController(UserModel model, ConsoleView view) {
         this.view = view;
         this.model = model;
@@ -43,9 +43,8 @@ public class UserController {
         String password = data.get(1);
 
         if(!Objects.equals(username, "") && !Objects.equals(password, "")){
-            User newUser = model.loginUser(username, password);
-            System.out.println(newUser.getUserName());
-            System.out.println(newUser.getWalletBalance());
+            user = model.loginUser(username, password);
+
         }
 
 

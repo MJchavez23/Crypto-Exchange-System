@@ -38,7 +38,6 @@ public class ConsoleView {
         System.out.print("ENTER YOUR CHOICE: ");
 
         try{
-
             int choice = scanner.nextInt();
             scanner.nextLine();
             return choice;
