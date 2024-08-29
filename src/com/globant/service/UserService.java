@@ -14,8 +14,15 @@ public class UserService {
         model = new UserModel();
     }
 
-    public void login(){
+    public User login(String username, String password){
+        try{
+            if(!Objects.equals(username, "") && !Objects.equals(password, "")){
+                return model.loginUser(username, password);
+            }
+        }catch(Exception e){
 
+        }
+        return null;
     }
 
     public void register(String username, String password, String email){
@@ -23,7 +30,6 @@ public class UserService {
                 int newUserId = rand.nextInt(Integer.MAX_VALUE) + 1;
                 User newUser = new User(newUserId, username, email, password);
                 model.registerUser(newUser);
-                login();
             }
 
     }
