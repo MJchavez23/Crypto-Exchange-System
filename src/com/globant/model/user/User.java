@@ -21,6 +21,10 @@ public class User {
         this.wallet = new Wallet(userId, balanceFiat);
     }
 
+    public Wallet getWallet() {
+        return wallet;
+    }
+
     public double getWalletBalance() {
         return wallet.getBalanceFiat();
     }
@@ -40,5 +44,9 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public void depositFiat(double amount) {
+        wallet.depositFiat(amount);
     }
 }
