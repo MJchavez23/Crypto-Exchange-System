@@ -1,9 +1,8 @@
 package com.globant.model.wallet;
 
-import java.util.HashMap;
 
 public class Wallet {
-    private int userId;
+    private final int userId;
     private double balanceFiat;
     private double bitCoinBalance;
     private double ethereumBalance;
