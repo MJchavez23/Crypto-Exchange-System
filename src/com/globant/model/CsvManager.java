@@ -6,7 +6,7 @@ import java.io.*;
 
 public class CsvManager {
     private static final String CSV_USER_FILE = "src/com/globant/model/user/users.csv";
-    private static final String CSV_WALLET_FILE = "wallet.csv";
+    private static final String CSV_WALLET_FILE = "src/com/globant/model/wallet/wallet.csv";
 
     public void writeNewUser(int userId, String userName, String email, String password) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_USER_FILE, true))) {
