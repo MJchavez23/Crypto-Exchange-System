@@ -85,10 +85,12 @@ public class ConsoleView {
             }
     }
 
-    public int balancePage(double balance, String userName){
+    public int balancePage(double balance, String userName, double bitcoin, double ethereum){
         System.out.println("---- BALANCE PAGE ----");
         System.out.println("Username: " + userName);
-        System.out.println("Balance: " + balance);
+        System.out.println("Balance Fiat: " + balance);
+        System.out.println("Bitcoin: " + bitcoin);
+        System.out.println("Ethereum: " + ethereum);
         System.out.println("1.Go back");
         try{
             int choice = scanner.nextInt();
