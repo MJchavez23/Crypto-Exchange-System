@@ -17,6 +17,14 @@ public class User {
         this.password = password;
     }
 
+    public double getBitCoinCurrency(){
+        return wallet.getBitCoinBalance();
+    }
+
+    public double getEthereumCurrency(){
+        return wallet.getEthereumBalance();
+    }
+
     public void setWallet(int userId, Double balanceFiat) {
         this.wallet = new Wallet(userId, balanceFiat);
     }
