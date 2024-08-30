@@ -45,7 +45,7 @@ public class UserController {
 
 
      public int executeBalance(){
-        int choice = view.balancePage(user.getWalletBalance(), user.getUserName());
+        int choice = view.balancePage(user.getWalletBalance(), user.getUserName(), user.getBitCoinCurrency(), user.getEthereumCurrency());
         if (choice == 1){
             return 1;
         }
