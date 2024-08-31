@@ -63,6 +63,14 @@ public class UserController {
         user = null;
      }
 
+     public void placeSellOrder(){
+        String[] data = view.placeSellOrderPage();
+        try{
+            userService.placeSellOrder(data, user);
+        }catch(Exception e){
+            view.showError("Place Sell Order Error");
+        }
+     }
 
 
 

@@ -9,10 +9,11 @@ import java.util.Random;
 public class UserService {
     private final Random rand = new Random();
     private final UserModel model;
-
+    private final OrderService orderService;
 
     public UserService(){
         model = new UserModel();
+        orderService = new OrderService();
     }
 
     public User login(String username, String password){
@@ -44,5 +45,9 @@ public class UserService {
 
     public void logOut(User user){
         model.logOut(user.getUserId(), user.getWalletBalance());
+    }
+
+    public void placeSellOrder(String[] data, User user) throws Exception {
+        orderService.placeSellOrder(data, user);
     }
 }
