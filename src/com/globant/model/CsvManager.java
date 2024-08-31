@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class CsvManager {
+
     private static final String CSV_USER_FILE = "src/com/globant/model/user/users.csv";
     private static final String CSV_WALLET_FILE = "src/com/globant/model/wallet/wallet.csv";
+    private static final String CSV_SELL_ORDER_FILE = "src/com/globant/model/sell_order.csv";
+
 
     public void writeNewUser(int userId, String userName, String email, String password) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_USER_FILE, true))) {
@@ -127,5 +130,22 @@ public class CsvManager {
 
     }
 
+    public void writeSellOrder(int orderId, int userId, String cryptoCurrency, double amount, double price){
+        try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_SELL_ORDER_FILE, true))) {
+            pw.printf("%d,%d,\"%s\",%.2f,%.2f",
+                    orderId,
+                    userId,
+                    cryptoCurrency.replace("\"", "\"\""),
+                    amount,
+                    price);
+        } catch (IOException e) {
+
+        }
+    }
+
+
+    public void writeTransaction(){
+
+    }
 
 }
