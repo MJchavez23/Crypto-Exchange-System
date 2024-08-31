@@ -1,5 +1,6 @@
 ### IntelliJ IDEA ###
 .idea/workspace.xml
+src/com/globant/model/sell_order.csv
 src/com/globant/model/wallet/wallet.csv
 src/com/globant/model/user/users.csv
 .
