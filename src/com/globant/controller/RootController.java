@@ -60,12 +60,15 @@ public class RootController {
                     showMenuPage();
                     break;
 
-                case 5:
+                case 3:
+                    userController.placeSellOrder();
+                    showMenuPage();
+                    break;
+
+                case 7:
                     userController.executeLogOut();
                     run();
                     break;
-
-
             }
         }
     }
