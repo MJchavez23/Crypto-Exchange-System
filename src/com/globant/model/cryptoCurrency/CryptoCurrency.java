@@ -1,4 +1,4 @@
-package com.globant.model;
+package com.globant.model.cryptoCurrency;
 
 import java.util.Random;
 
@@ -20,6 +20,10 @@ public class CryptoCurrency {
 
     public double getCryptoPrice(){
         return price;
+    }
+
+    public String getName(){
+        return name;
     }
 
 
