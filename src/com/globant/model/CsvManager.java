@@ -80,7 +80,7 @@ public class CsvManager {
     }
 
 
-    public void updateBalance(int userId, double newBalance) {
+    public void updateWallet(int userId, double newBalance) {
             List<String> lines = new ArrayList<>();
         boolean updated = false;
 

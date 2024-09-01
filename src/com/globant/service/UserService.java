@@ -43,6 +43,12 @@ public class UserService {
         }
     }
 
+    public void balanceDeduct(User user, double amount){
+        if(user.getWalletBalance() > amount){
+            model.deductBalance(user, amount);
+        }
+    }
+
     public void logOut(User user){
         model.logOut(user.getUserId(), user.getWalletBalance());
     }

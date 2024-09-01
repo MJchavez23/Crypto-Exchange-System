@@ -1,19 +1,23 @@
 package com.globant.service;
 
 import com.globant.model.orders.OrderModel;
+import com.globant.model.transaction.TransactionModel;
+import com.globant.model.transaction.TransactionService;
 import com.globant.model.user.User;
 import com.globant.model.user.UserModel;
+import com.globant.model.wallet.WalletService;
+
 import java.util.Random;
 
 public class OrderService {
     private final OrderModel model;
-    private final UserModel user;
     private final Random rand  = new Random();
-    private java.lang.Exception Exception;
-
+    private final TransactionService transactionService;
+    private final WalletService walletService;
     public OrderService() {
-        user = new UserModel();
         model = new OrderModel();
+        walletService = new WalletService();
+        transactionService = new TransactionService();
     }
 
     public void placeSellOrder(String[] data, User user) throws Exception {
@@ -33,6 +37,14 @@ public class OrderService {
                 throw new Exception("Error");
             }
         }
+    }
 
+
+    public void addBitCoin(User user, double price, double amount){
+        walletService.setBitCoinAmount(user.getWallet(), amount);
+    }
+
+    public void addEthereum(User user, double price, double amount){
+        walletService.setEthereumAmount(user.getWallet(), amount);
     }
 }

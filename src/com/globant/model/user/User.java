@@ -57,4 +57,8 @@ public class User {
     public void depositFiat(double amount) {
         wallet.depositFiat(amount);
     }
+
+    public void deductFiat(double amount) {
+        wallet.deductFiat(amount);
+    }
 }

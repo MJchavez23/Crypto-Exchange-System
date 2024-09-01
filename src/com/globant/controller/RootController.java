@@ -1,8 +1,7 @@
 package com.globant.controller;
 
-import com.globant.model.BitCoin;
-import com.globant.model.CryptoCurrency;
-import com.globant.model.Ethereum;
+import com.globant.model.cryptoCurrency.BitCoin;
+import com.globant.model.cryptoCurrency.Ethereum;
 import com.globant.model.wallet.WalletModel;
 import com.globant.service.UserService;
 import com.globant.view.ConsoleView;

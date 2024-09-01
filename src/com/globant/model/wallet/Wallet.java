@@ -1,11 +1,13 @@
 package com.globant.model.wallet;
 
 
+import com.globant.model.cryptoCurrency.Ethereum;
+
 public class Wallet {
     private final int userId;
     private double balanceFiat;
-    private final double bitCoinBalance;
-    private final double ethereumBalance;
+    private double bitCoinBalance;
+    private double ethereumBalance;
 
 
     public Wallet(int userId, double balanceFiat) {
@@ -14,6 +16,14 @@ public class Wallet {
         this.bitCoinBalance = 0;
         this.ethereumBalance = 0;
     }
+    public void setBitCoinBalance(double newBitCoinBalance) {
+        bitCoinBalance = bitCoinBalance + newBitCoinBalance;
+    }
+
+    public void setEthereumBalance(double newBitCoinBalance) {
+        ethereumBalance = ethereumBalance + newBitCoinBalance;
+    }
+
     public double getBitCoinBalance(){
         return bitCoinBalance;
     }
@@ -28,5 +38,9 @@ public class Wallet {
 
     public void depositFiat(double amount) {
         balanceFiat = balanceFiat + amount;
+    }
+
+    public void deductFiat(double amount) {
+        balanceFiat = balanceFiat - amount;
     }
 }

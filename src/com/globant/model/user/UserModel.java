@@ -34,7 +34,12 @@ public class UserModel {
 
     }
 
+
+    public void deductBalance(User user, double amount){
+        user.deductFiat(amount);
+    }
+
     public void logOut(int userid, double balance){
-        csvManager.updateBalance(userid, balance);
+        csvManager.updateWallet(userid, balance);
     }
 }
