@@ -17,16 +17,16 @@ public class User {
         this.password = password;
     }
 
-    public double getBitCoinCurrency(){
+    public double getBitCoinBalance(){
         return wallet.getBitCoinBalance();
     }
 
-    public double getEthereumCurrency(){
+    public double getEthereumBalance(){
         return wallet.getEthereumBalance();
     }
 
-    public void setWallet(int userId, Double balanceFiat) {
-        this.wallet = new Wallet(userId, balanceFiat);
+    public void setWallet(int userId, Double balanceFiat, double bitCoinBalance, double ethereumBalance) {
+        this.wallet = new Wallet(userId, balanceFiat, bitCoinBalance, ethereumBalance);
     }
 
     public Wallet getWallet() {
