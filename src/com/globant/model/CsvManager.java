@@ -9,7 +9,7 @@ public class CsvManager {
     private static final String CSV_USER_FILE = "src/com/globant/model/user/users.csv";
     private static final String CSV_WALLET_FILE = "src/com/globant/model/wallet/wallet.csv";
     private static final String CSV_SELL_ORDER_FILE = "src/com/globant/model/orders/sell_order.csv";
-    private static final String CSV_SELL_TRANSACTION = "src/com/globant/model/transaction/sell_transactions.csv";
+    private static final String CSV_SELL_TRANSACTION = "src/com/globant/model/transaction/transactions.csv";
 
 
     public void writeNewUser(int userId, String userName, String email, String password) {

@@ -9,8 +9,8 @@ public class TransactionService {
         this.model = new TransactionModel();
     }
 
-    public void saveSellTransaction(User user, String cryptoName, double amount, double price, int isBuying){
+    public void saveTransaction(User user, String cryptoName, double amount, double price, int isBuying){
         int sellerId = user.getUserId();
-        model.saveSellTransaction(sellerId, cryptoName, amount, price, isBuying);
+        model.saveTransaction(sellerId, cryptoName, amount, price, isBuying);
     }
 }
