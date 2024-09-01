@@ -1,6 +1,8 @@
 package com.globant.model.user;
 
 import com.globant.model.CsvManager;
+import com.globant.model.wallet.Wallet;
+
 import java.util.List;
 
 public class UserModel {
@@ -28,7 +30,9 @@ public class UserModel {
         String[] newWallet = csvManager.getWallet(newUserId);
         int walletUserId = Integer.parseInt(newWallet[0]);
         double walletBalance = Double.parseDouble(newWallet[1]);
-        newUser.setWallet(walletUserId, walletBalance);
+        double bitCoinBalance = Double.parseDouble(newWallet[2]);
+        double ethereumBalance = Double.parseDouble(newWallet[3]);
+        newUser.setWallet(walletUserId, walletBalance, bitCoinBalance, ethereumBalance);
 
         return newUser;
 
@@ -39,7 +43,10 @@ public class UserModel {
         user.deductFiat(amount);
     }
 
-    public void logOut(int userid, double balance){
-        csvManager.updateWallet(userid, balance);
+    public void logOut(int userid, Wallet wallet){
+        double newBalance = wallet.getBalanceFiat();
+        double bitCoinAmount = wallet.getBitCoinBalance();
+        double ethereumAmount = wallet.getEthereumBalance();
+        csvManager.updateWallet(userid, newBalance, bitCoinAmount, ethereumAmount);
     }
 }
