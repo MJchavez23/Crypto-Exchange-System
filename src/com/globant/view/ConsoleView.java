@@ -155,7 +155,7 @@ public class ConsoleView {
 
     public String[] buyExchange(){
         System.out.println("---- BUY EXCHANGE ----");
-        String crypto = cryptoCurrencySellChoice();
+        String crypto = cryptoCurrencyBuyChoice();
         System.out.print("How much do you want to buy?: ");
         String amount = scanner.nextLine();
         return new String[]{crypto, amount};
