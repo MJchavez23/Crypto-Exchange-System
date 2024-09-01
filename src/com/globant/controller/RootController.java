@@ -1,19 +1,22 @@
 package com.globant.controller;
 
+import com.globant.model.BitCoin;
+import com.globant.model.CryptoCurrency;
+import com.globant.model.Ethereum;
 import com.globant.model.wallet.WalletModel;
 import com.globant.service.UserService;
 import com.globant.view.ConsoleView;
 
 public class RootController {
     private final UserController userController;
-    private final WalletController walletController;
     private final ConsoleView view;
-
 
     public RootController(UserService userService, WalletModel walletModel, ConsoleView view){
         this.view = view;
         userController = new UserController(userService, view);
-        walletController = new WalletController(walletModel, view);
+        WalletController walletController = new WalletController(walletModel, view);
+        BitCoin bitCoin = new BitCoin("BTC", 50000.0, "BitCoin");
+        Ethereum ethereum = new Ethereum("ETH", 3000.0, "Eth");
     }
 
     public void run(){
