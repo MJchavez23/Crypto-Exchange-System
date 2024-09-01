@@ -8,7 +8,7 @@ public class CsvManager {
 
     private static final String CSV_USER_FILE = "src/com/globant/model/user/users.csv";
     private static final String CSV_WALLET_FILE = "src/com/globant/model/wallet/wallet.csv";
-    private static final String CSV_SELL_ORDER_FILE = "src/com/globant/model/sell_order.csv";
+    private static final String CSV_SELL_ORDER_FILE = "src/com/globant/model/orders/sell_order.csv";
 
 
     public void writeNewUser(int userId, String userName, String email, String password) {
@@ -80,8 +80,8 @@ public class CsvManager {
     }
 
 
-    public void updateWallet(int userId, double newBalance) {
-            List<String> lines = new ArrayList<>();
+    public void updateWallet(int userId, double newBalance, double bitCoinAmount, double ethereumAmount) {
+        List<String> lines = new ArrayList<>();
         boolean updated = false;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_WALLET_FILE))) {
@@ -95,22 +95,18 @@ public class CsvManager {
                     try {
                         csvUserId = Integer.parseInt(csvUserIdStr);
                     } catch (NumberFormatException e) {
-                        // Skip lines with invalid userId
                         lines.add(line);
                         continue;
                     }
 
                     if (userId == csvUserId) {
-                        // Update only the balance
-                        lines.add(String.format("%d,%.2f,%s,%s",
-                            csvUserId, newBalance, parts[2], parts[3]));
+                        lines.add(String.format("%d,%.2f,%.2f,%.2f",
+                            csvUserId, newBalance, bitCoinAmount, ethereumAmount));
                         updated = true;
                     } else {
-                        // Keep the existing line
                         lines.add(line);
                     }
                 } else {
-                    // Keep lines with less data
                     lines.add(line);
                 }
             }
@@ -118,7 +114,6 @@ public class CsvManager {
         } catch (IOException e) {
         }
 
-        // Write the updated lines back to the file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_WALLET_FILE))) {
             for (String updatedLine : lines) {
                 writer.write(updatedLine);
@@ -126,8 +121,6 @@ public class CsvManager {
             }
         } catch (IOException e) {
         }
-
-
     }
 
     public void writeSellOrder(int orderId, int userId, String cryptoCurrency, double amount, double price){
@@ -142,8 +135,6 @@ public class CsvManager {
 
         }
     }
-
-
     public void writeTransaction(){
 
     }
