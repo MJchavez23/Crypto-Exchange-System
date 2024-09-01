@@ -184,5 +184,6 @@ public class ConsoleView {
     }
 
     public void showError(String errorMessage) {System.out.println(errorMessage);}
+    public void showSuccess(String message){System.out.println(message);}
     public void close(){this.scanner.close();}
 }
