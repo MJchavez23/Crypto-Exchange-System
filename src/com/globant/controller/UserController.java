@@ -27,6 +27,7 @@ public class UserController {
         String email = data.get(2);
         try{
             userService.register(username, password, email);
+            view.showSuccess("User successfully registered");
         }catch(Exception e){
             view.showError("Register Error");
         }
@@ -42,6 +43,7 @@ public class UserController {
             view.showError("Login Error");
             return null;
         }else{
+            view.showSuccess("User logged in");
             return user;
         }
     }
@@ -58,12 +60,14 @@ public class UserController {
      public void executeDeposit(){
         double amount = view.depositPage();
         userService.deposit(amount, user);
+        view.showSuccess("Deposit successful");
      }
 
 
      public void executeLogOut(){
         userService.logOut(user);
         user = null;
+        view.showSuccess("Logout successful");
      }
 
      public void placeSellOrder(BitCoin bitCoin, Ethereum ethereum){
@@ -71,13 +75,15 @@ public class UserController {
         if(Objects.equals(data[0], "BitCoin")){
             try{
                 userService.placeSellOrder(data, user, bitCoin);
+                view.showSuccess("Place sell order successful");
             }catch(Exception e){
                 view.showError("Place Sell Order Error");
             }
         }
-        if(Objects.equals(data[1], "Ethereum")){
+        if(Objects.equals(data[0], "Ethereum")){
             try{
                 userService.placeSellOrder(data, user, ethereum);
+                view.showSuccess("Place sell order successful");
             }catch(Exception e){
                 view.showError("Place Sell Order Error");
             }
