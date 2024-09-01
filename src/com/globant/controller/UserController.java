@@ -71,7 +71,7 @@ public class UserController {
      }
 
      public void placeSellOrder(BitCoin bitCoin, Ethereum ethereum){
-        String[] data = view.placeSellOrderPage();
+        String[] data = view.placeSellOrderPage(bitCoin.getPrice(), ethereum.getPrice());
         if(Objects.equals(data[0], "BitCoin")){
             try{
                 userService.placeSellOrder(data, user, bitCoin);
