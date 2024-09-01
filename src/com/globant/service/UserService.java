@@ -1,5 +1,6 @@
 package com.globant.service;
 
+import com.globant.model.cryptoCurrency.CryptoCurrency;
 import com.globant.model.user.User;
 import com.globant.model.user.UserModel;
 
@@ -50,10 +51,10 @@ public class UserService {
     }
 
     public void logOut(User user){
-        model.logOut(user.getUserId(), user.getWalletBalance());
+        model.logOut(user.getUserId(), user.getWallet());
     }
 
-    public void placeSellOrder(String[] data, User user) throws Exception {
-        orderService.placeSellOrder(data, user);
+    public void placeSellOrder(String[] data, User user, CryptoCurrency crypto) throws Exception {
+        orderService.placeSellOrder(data, user, crypto, user.getWallet());
     }
 }
