@@ -18,7 +18,7 @@ public class CryptoCurrency {
     }
 
 
-    public double getCryptoPrice(){
+    public double getPrice(){
         return price;
     }
 
