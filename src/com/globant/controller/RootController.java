@@ -2,6 +2,7 @@ package com.globant.controller;
 
 import com.globant.model.cryptoCurrency.BitCoin;
 import com.globant.model.cryptoCurrency.Ethereum;
+import com.globant.model.transaction.TransactionService;
 import com.globant.model.user.User;
 import com.globant.model.wallet.WalletModel;
 import com.globant.service.OrderService;
@@ -12,14 +13,16 @@ public class RootController {
     private final UserController userController;
     private final ConsoleView view;
     private final OrderController orderController;
+    private final TransactionController transactionController;
     private User user;
     private BitCoin bitCoin;
     private Ethereum ethereum;
 
-    public RootController(UserService userService, OrderService orderService, ConsoleView view){
+    public RootController(UserService userService, OrderService orderService, TransactionService transactionService, ConsoleView view){
         this.view = view;
         userController = new UserController(userService, view);
         orderController = new OrderController(orderService, view);
+        transactionController = new TransactionController(transactionService, view);
         bitCoin = new BitCoin("BTC", 50000.0, "BitCoin");
         ethereum = new Ethereum("ETH", 3000.0, "Ethereum");
     }
@@ -71,6 +74,12 @@ public class RootController {
 
                 case 3:
                     userController.placeSellOrder(bitCoin, ethereum);
+                    showMenuPage();
+                    break;
+
+                case 5:
+
+                    transactionController.showUserTransactions(user);
                     showMenuPage();
                     break;
                 case 6:

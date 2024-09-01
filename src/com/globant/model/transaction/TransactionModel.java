@@ -15,4 +15,9 @@ public class TransactionModel {
     public void saveTransaction(int sellerId, String cryptoCurrencyName, double amount, double tradePrice, int isBuying){
         csvManager.writeSellTransaction(sellerId, cryptoCurrencyName, amount, tradePrice, isBuying);
     }
+
+    public String[] userTransactions(int userId){
+       return csvManager.getTransactions(userId);
+    }
+
 }

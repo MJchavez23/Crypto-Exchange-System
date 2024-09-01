@@ -13,4 +13,10 @@ public class TransactionService {
         int sellerId = user.getUserId();
         model.saveTransaction(sellerId, cryptoName, amount, price, isBuying);
     }
+
+
+    public String[] getUserTransaction(User user){
+        int userId = user.getUserId();
+        return model.userTransactions(userId);
+    }
 }
