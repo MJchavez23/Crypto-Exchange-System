@@ -116,9 +116,24 @@ public class ConsoleView {
         }
     }
 
+    public String[] placeBuyOrderPage(double bitcoinPrice, double ethereumPrice){
+        System.out.println("---- PLACE BUY ORDER PAGE ----");
+        System.out.println("Bitcoin: " + bitcoinPrice);
+        System.out.println("Ethereum: " + ethereumPrice);
+        String cryptoType = cryptoCurrencyBuyChoice();
+        System.out.print("How much do you want to buy?: ");
+        String amount = scanner.nextLine();
+        System.out.print("What price are you willing to pay: ");
+        String price = scanner.nextLine();
+        return new String[]{cryptoType, amount, price};
+    }
 
-    public String[] placeSellOrderPage(){
-        System.out.println("---- PLACE ORDER PAGE ----");
+
+
+    public String[] placeSellOrderPage(double bitcoinPrice, double ethereumPrice){
+        System.out.println("---- PLACE SELL ORDER PAGE ----");
+        System.out.println("Bitcoin: " + bitcoinPrice);
+        System.out.println("Ethereum: " + ethereumPrice);
         String cryptoType = cryptoCurrencySellChoice();
         System.out.print("How much do you want to sell?: ");
         String amount = scanner.nextLine();
