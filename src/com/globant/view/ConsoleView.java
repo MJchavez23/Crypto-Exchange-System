@@ -1,9 +1,6 @@
 package com.globant.view;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ConsoleView {
     private final Scanner scanner;
@@ -180,6 +177,16 @@ public class ConsoleView {
         }catch (Exception e){
             scanner.nextLine();
             return null;
+        }
+    }
+
+    public void showTransaction(String cryptoName, String amount, String price, String isbuying){
+        if(Objects.equals(isbuying, "1")){
+            System.out.printf("You place a buy order of %s %s at a price of %s\n", amount, cryptoName, price);
+        }else{
+            if(Objects.equals(isbuying, "0")){
+                System.out.printf("You place a sell order of %s %s at a price of %s\n", amount, cryptoName, price);
+            }
         }
     }
 
