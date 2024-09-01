@@ -9,7 +9,7 @@ public class CsvManager {
     private static final String CSV_USER_FILE = "src/com/globant/model/user/users.csv";
     private static final String CSV_WALLET_FILE = "src/com/globant/model/wallet/wallet.csv";
     private static final String CSV_SELL_ORDER_FILE = "src/com/globant/model/orders/sell_order.csv";
-    private static final String CSV_SELL_TRANSACTION = "src/com/globant/model/transaction/transactions.csv";
+    private static final String CSV_TRANSACTIONS = "src/com/globant/model/transaction/transactions.csv";
 
 
     public void writeNewUser(int userId, String userName, String email, String password) {
@@ -80,6 +80,36 @@ public class CsvManager {
         return null;
     }
 
+    public String[] getTransactions(int userId){
+
+        List<String> transactions = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(CSV_TRANSACTIONS))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                if (parts.length == 5) {
+                    String csvUserIdStr = parts[0].replace("\"", "").trim();
+                    int csvUserId;
+                    try {
+                        csvUserId = Integer.parseInt(csvUserIdStr);
+                    }catch (NumberFormatException e) {
+                        continue;
+                    }
+
+                    if (userId == csvUserId) {
+                        transactions.add(line);
+                    }
+                }
+            }
+        } catch (IOException e) {
+
+        }
+        return transactions.toArray(new String[0]);
+    }
+
+
 
     public void updateWallet(int userId, double newBalance, double bitCoinAmount, double ethereumAmount) {
         List<String> lines = new ArrayList<>();
@@ -138,7 +168,7 @@ public class CsvManager {
         }
     }
     public void writeSellTransaction(int userId, String cryptoCurrency, double amount, double price,int isBuying){
-        try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_SELL_TRANSACTION, true))) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_TRANSACTIONS, true))) {
             pw.printf("%d,\"%s\",%.2f,%.2f,%d%n",
                     userId,
                     cryptoCurrency.replace("\"", "\"\""),
