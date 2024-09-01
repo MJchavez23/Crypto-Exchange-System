@@ -126,24 +126,26 @@ public class CsvManager {
 
     public void writeSellOrder(int orderId, int userId, String cryptoCurrency, double amount, double price){
         try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_SELL_ORDER_FILE, true))) {
-            pw.printf("%d,%d,\"%s\",%.2f,%.2f",
+            pw.printf("%d,%d,\"%s\",%.2f,%.2f%n",
                     orderId,
                     userId,
                     cryptoCurrency.replace("\"", "\"\""),
                     amount,
                     price);
+             pw.println();
         } catch (IOException e) {
 
         }
     }
-    public void writeSellTransaction(int userId, String cryptoCurrency, double amount, double price){
+    public void writeSellTransaction(int userId, String cryptoCurrency, double amount, double price,int isBuying){
         try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_SELL_TRANSACTION, true))) {
-            pw.printf("%d,\"%s\",%.2f,%.2f, %d",
+            pw.printf("%d,\"%s\",%.2f,%.2f,%d%n",
                     userId,
                     cryptoCurrency.replace("\"", "\"\""),
                     amount,
                     price,
-                    0);
+                    isBuying);
+             pw.println();
         } catch (IOException e) {
 
         }
