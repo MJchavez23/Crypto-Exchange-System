@@ -9,6 +9,7 @@ public class CsvManager {
     private static final String CSV_USER_FILE = "src/com/globant/model/user/users.csv";
     private static final String CSV_WALLET_FILE = "src/com/globant/model/wallet/wallet.csv";
     private static final String CSV_SELL_ORDER_FILE = "src/com/globant/model/orders/sell_order.csv";
+    private static final String CSV_SELL_TRANSACTION = "src/com/globant/model/transaction/sell_transactions.csv";
 
 
     public void writeNewUser(int userId, String userName, String email, String password) {
@@ -135,8 +136,17 @@ public class CsvManager {
 
         }
     }
-    public void writeTransaction(){
+    public void writeSellTransaction(int userId, String cryptoCurrency, double amount, double price){
+        try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_SELL_TRANSACTION, true))) {
+            pw.printf("%d,\"%s\",%.2f,%.2f, %d",
+                    userId,
+                    cryptoCurrency.replace("\"", "\"\""),
+                    amount,
+                    price,
+                    0);
+        } catch (IOException e) {
 
+        }
     }
 
 }
