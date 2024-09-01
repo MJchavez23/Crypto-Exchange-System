@@ -23,17 +23,19 @@ public class OrderController {
         String crypto = data[0];
         double amount = Double.parseDouble(data[1]);
         if (crypto.equals(bitCoin.getName())){
-            double price = bitCoin.getCryptoPrice() * amount;
+            double price = bitCoin.getPrice() * amount;
             if (user.getWalletBalance() > price){
                 userService.balanceDeduct(user, price);
                 orderService.addBitCoin(user, price, amount);
+                view.showSuccess("Sell order successful");
             }
         }
         if (crypto.equals(ethereum.getName())){
-            double price = ethereum.getCryptoPrice() * amount;
+            double price = ethereum.getPrice() * amount;
             if (user.getWalletBalance() > price){
                 userService.balanceDeduct(user, price);
                 orderService.addEthereum(user, price, amount);
+                view.showSuccess("Sell order successful");
             }
         }
     }
