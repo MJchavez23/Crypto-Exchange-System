@@ -1,7 +1,7 @@
 package com.globant.model.transaction;
 
-
 import com.globant.model.CsvManager;
+
 
 public class TransactionModel {
     private int buyerId;
@@ -12,7 +12,7 @@ public class TransactionModel {
 
     private final CsvManager csvManager = new CsvManager();
 
-    public void placeTransaction(){
-        csvManager.writeTransaction();
+    public void saveSellTransaction(int sellerId, String cryptoCurrencyName, double amount, double tradePrice){
+        csvManager.writeSellTransaction(sellerId, cryptoCurrencyName, amount, tradePrice);
     }
 }
