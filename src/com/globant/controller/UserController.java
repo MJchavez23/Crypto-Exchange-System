@@ -1,9 +1,12 @@
 package com.globant.controller;
 
+import com.globant.model.cryptoCurrency.BitCoin;
+import com.globant.model.cryptoCurrency.Ethereum;
 import com.globant.model.user.User;
 import com.globant.service.UserService;
 import com.globant.view.ConsoleView;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class UserController {
@@ -30,22 +33,22 @@ public class UserController {
     }
 
 
-    public int executeLogin(){
+    public User executeLogin(){
         List<String> data = view.loginPage();
         String username = data.get(0);
         String password = data.get(1);
         user = userService.login(username, password);
         if(user == null){
             view.showError("Login Error");
-            return -1;
+            return null;
         }else{
-            return 1;
+            return user;
         }
     }
 
 
      public int executeBalance(){
-        int choice = view.balancePage(user.getWalletBalance(), user.getUserName(), user.getBitCoinCurrency(), user.getEthereumCurrency());
+        int choice = view.balancePage(user.getWalletBalance(), user.getUserName(), user.getBitCoinBalance(), user.getEthereumBalance());
         if (choice == 1){
             return 1;
         }
@@ -63,13 +66,23 @@ public class UserController {
         user = null;
      }
 
-     public void placeSellOrder(){
+     public void placeSellOrder(BitCoin bitCoin, Ethereum ethereum){
         String[] data = view.placeSellOrderPage();
-        try{
-            userService.placeSellOrder(data, user);
-        }catch(Exception e){
-            view.showError("Place Sell Order Error");
+        if(Objects.equals(data[0], "BitCoin")){
+            try{
+                userService.placeSellOrder(data, user, bitCoin);
+            }catch(Exception e){
+                view.showError("Place Sell Order Error");
+            }
         }
+        if(Objects.equals(data[1], "Ethereum")){
+            try{
+                userService.placeSellOrder(data, user, ethereum);
+            }catch(Exception e){
+                view.showError("Place Sell Order Error");
+            }
+        }
+
      }
 
 
