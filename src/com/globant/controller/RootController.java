@@ -73,14 +73,10 @@ public class RootController {
                     userController.placeSellOrder(bitCoin, ethereum);
                     showMenuPage();
                     break;
-
-
                 case 6:
                     orderController.buyExchange(user, bitCoin, ethereum);
                     showMenuPage();
                     break;
-
-
                 case 7:
                     userController.executeLogOut();
                     run();
