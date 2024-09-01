@@ -2,20 +2,26 @@ package com.globant.controller;
 
 import com.globant.model.cryptoCurrency.BitCoin;
 import com.globant.model.cryptoCurrency.Ethereum;
+import com.globant.model.user.User;
 import com.globant.model.wallet.WalletModel;
+import com.globant.service.OrderService;
 import com.globant.service.UserService;
 import com.globant.view.ConsoleView;
 
 public class RootController {
     private final UserController userController;
     private final ConsoleView view;
+    private final OrderController orderController;
+    private User user;
+    private BitCoin bitCoin;
+    private Ethereum ethereum;
 
-    public RootController(UserService userService, WalletModel walletModel, ConsoleView view){
+    public RootController(UserService userService, OrderService orderService, ConsoleView view){
         this.view = view;
         userController = new UserController(userService, view);
-        WalletController walletController = new WalletController(walletModel, view);
-        BitCoin bitCoin = new BitCoin("BTC", 50000.0, "BitCoin");
-        Ethereum ethereum = new Ethereum("ETH", 3000.0, "Eth");
+        orderController = new OrderController(orderService, view);
+        bitCoin = new BitCoin("BTC", 50000.0, "BitCoin");
+        ethereum = new Ethereum("ETH", 3000.0, "Ethereum");
     }
 
     public void run(){
@@ -38,8 +44,9 @@ public class RootController {
     }
 
     public void checkLogin(){
-        int result = userController.executeLogin();
-        if (result == 1){
+        User result = userController.executeLogin();
+        if (result != null){
+            user = result;
             showMenuPage();
         }else{
             run();
@@ -63,9 +70,16 @@ public class RootController {
                     break;
 
                 case 3:
-                    userController.placeSellOrder();
+                    userController.placeSellOrder(bitCoin, ethereum);
                     showMenuPage();
                     break;
+
+
+                case 6:
+                    orderController.buyExchange(user, bitCoin, ethereum);
+                    showMenuPage();
+                    break;
+
 
                 case 7:
                     userController.executeLogOut();
