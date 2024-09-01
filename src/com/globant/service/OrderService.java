@@ -27,13 +27,15 @@ public class OrderService {
         double amount = Double.parseDouble(data[1]);
         double price = Double.parseDouble(data[2]);
 
-        if(cryptoName.equals("BitCoin") && user.getBitCoinBalance() > amount && price > crypto.getCryptoPrice() ) {
+        if(cryptoName.equals("BitCoin") && user.getBitCoinBalance() > amount && price > crypto.getPrice()) {
                 walletService.deductBitCoinAmount(userWallet, amount);
                 model.setSellOrder(orderId, userId, cryptoName, amount, price);
+                transactionService.saveSellTransaction(user, cryptoName, amount, price, 0);
         }else{
-            if(cryptoName.equals("Ethereum") && user.getEthereumBalance() > amount){
+            if(cryptoName.equals("Ethereum") && user.getEthereumBalance() > amount && price > crypto.getPrice()){
                 walletService.deductEthereumAmount(userWallet, amount);
                 model.setSellOrder(orderId, userId, cryptoName, amount, price);
+                transactionService.saveSellTransaction(user, cryptoName, amount, price, 0);
             }
             else{
                 throw new Exception("Error");
