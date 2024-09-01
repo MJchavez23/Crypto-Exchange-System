@@ -42,4 +42,10 @@ public class OrderController {
         }
     }
 
+    public void placeBuyOrder(double bitCoinPrice, double ethereumPrice) {
+        String[] data = view.placeBuyOrderPage(bitCoinPrice, ethereumPrice);
+    }
+
+
+
 }
