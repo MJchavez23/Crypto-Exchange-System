@@ -13,7 +13,7 @@ public class TransactionModel {
     private final CsvManager csvManager = new CsvManager();
 
     public void saveTransaction(int sellerId, String cryptoCurrencyName, double amount, double tradePrice, int isBuying){
-        csvManager.writeSellTransaction(sellerId, cryptoCurrencyName, amount, tradePrice, isBuying);
+        csvManager.writeTransaction(sellerId, cryptoCurrencyName, amount, tradePrice, isBuying);
     }
 
     public String[] userTransactions(int userId){
