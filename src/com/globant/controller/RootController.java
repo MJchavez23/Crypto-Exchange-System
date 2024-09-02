@@ -15,8 +15,8 @@ public class RootController {
     private final OrderController orderController;
     private final TransactionController transactionController;
     private User user;
-    private BitCoin bitCoin;
-    private Ethereum ethereum;
+    private final BitCoin bitCoin;
+    private final Ethereum ethereum;
 
     public RootController(UserService userService, OrderService orderService, TransactionService transactionService, ConsoleView view){
         this.view = view;
@@ -73,12 +73,12 @@ public class RootController {
                     break;
 
                 case 3:
-                    userController.placeSellOrder(bitCoin, ethereum);
+                    orderController.placeSellOrder(bitCoin, ethereum, user);
                     showMenuPage();
                     break;
 
                 case 4:
-                    orderController.placeBuyOrder(bitCoin.getPrice(), ethereum.getPrice());
+                    orderController.placeBuyOrder(user, bitCoin.getPrice(), ethereum.getPrice());
                     showMenuPage();
                     break;
 
