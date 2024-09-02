@@ -1,10 +1,8 @@
 package com.globant.controller;
 
-import com.globant.model.transaction.TransactionService;
+import com.globant.service.TransactionService;
 import com.globant.model.user.User;
 import com.globant.view.ConsoleView;
-
-import java.util.Arrays;
 
 public class TransactionController {
 

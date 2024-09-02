@@ -1,4 +1,6 @@
-package com.globant.model.wallet;
+package com.globant.service;
+
+import com.globant.model.wallet.Wallet;
 
 public class WalletService {
     public void addBitCoinAmount(Wallet wallet, double amount) {

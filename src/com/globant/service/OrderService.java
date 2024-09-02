@@ -4,10 +4,7 @@ import com.globant.model.cryptoCurrency.BitCoin;
 import com.globant.model.cryptoCurrency.CryptoCurrency;
 import com.globant.model.cryptoCurrency.Ethereum;
 import com.globant.model.orders.OrderModel;
-import com.globant.model.transaction.TransactionService;
 import com.globant.model.user.User;
-import com.globant.model.wallet.Wallet;
-import com.globant.model.wallet.WalletService;
 
 import java.util.Random;
 

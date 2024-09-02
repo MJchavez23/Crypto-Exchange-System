@@ -1,9 +1,7 @@
 package com.globant;
 
 import com.globant.controller.RootController;
-import com.globant.model.orders.OrderModel;
-import com.globant.model.transaction.TransactionService;
-import com.globant.model.wallet.WalletModel;
+import com.globant.service.TransactionService;
 import com.globant.service.OrderService;
 import com.globant.service.UserService;
 import com.globant.view.ConsoleView;

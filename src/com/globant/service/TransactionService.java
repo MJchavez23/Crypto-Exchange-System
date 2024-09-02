@@ -1,5 +1,6 @@
-package com.globant.model.transaction;
+package com.globant.service;
 
+import com.globant.model.transaction.TransactionModel;
 import com.globant.model.user.User;
 
 public class TransactionService {
