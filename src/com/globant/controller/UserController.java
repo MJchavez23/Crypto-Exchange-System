@@ -70,26 +70,6 @@ public class UserController {
         view.showSuccess("Logout successful");
      }
 
-     public void placeSellOrder(BitCoin bitCoin, Ethereum ethereum){
-        String[] data = view.placeSellOrderPage(bitCoin.getPrice(), ethereum.getPrice());
-        if(Objects.equals(data[0], "BitCoin")){
-            try{
-                userService.placeSellOrder(data, user, bitCoin);
-                view.showSuccess("Place sell order successful");
-            }catch(Exception e){
-                view.showError("Place Sell Order Error");
-            }
-        }
-        if(Objects.equals(data[0], "Ethereum")){
-            try{
-                userService.placeSellOrder(data, user, ethereum);
-                view.showSuccess("Place sell order successful");
-            }catch(Exception e){
-                view.showError("Place Sell Order Error");
-            }
-        }
-
-     }
 
 
 

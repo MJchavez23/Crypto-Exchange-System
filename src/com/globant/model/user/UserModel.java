@@ -47,6 +47,6 @@ public class UserModel {
         double newBalance = wallet.getBalanceFiat();
         double bitCoinAmount = wallet.getBitCoinBalance();
         double ethereumAmount = wallet.getEthereumBalance();
-        csvManager.updateWallet(userid, newBalance, bitCoinAmount, ethereumAmount);
+        csvManager.updateUserWallet(userid, newBalance, bitCoinAmount, ethereumAmount);
     }
 }

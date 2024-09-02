@@ -10,11 +10,8 @@ import java.util.Random;
 public class UserService {
     private final Random rand = new Random();
     private final UserModel model;
-    private final OrderService orderService;
-
     public UserService(){
         model = new UserModel();
-        orderService = new OrderService();
     }
 
     public User login(String username, String password){
@@ -37,7 +34,6 @@ public class UserService {
 
     }
 
-
     public void deposit(double amount, User user){
         if(amount > 0){
             user.depositFiat(amount);
@@ -54,7 +50,4 @@ public class UserService {
         model.logOut(user.getUserId(), user.getWallet());
     }
 
-    public void placeSellOrder(String[] data, User user, CryptoCurrency crypto) throws Exception {
-        orderService.placeSellOrder(data, user, crypto, user.getWallet());
-    }
 }

@@ -10,6 +10,7 @@ public class User {
     private final String password;
     private Wallet wallet;
 
+
     public User(int userId, String userName, String email, String password) {
         this.userId = userId;
         this.userName = userName;
