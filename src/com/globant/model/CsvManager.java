@@ -111,10 +111,9 @@ public class CsvManager {
 
 
 
-    public void updateWallet(int userId, double newBalance, double bitCoinAmount, double ethereumAmount) {
+    public void updateUserWallet(int userId, double newBalance, double bitCoinAmount, double ethereumAmount) {
         List<String> lines = new ArrayList<>();
         boolean updated = false;
-
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_WALLET_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -156,18 +155,18 @@ public class CsvManager {
 
     public void writeSellOrder(int orderId, int userId, String cryptoCurrency, double amount, double price){
         try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_SELL_ORDER_FILE, true))) {
-            pw.printf("%d,%d,\"%s\",%.2f,%.2f%n",
+            pw.printf("%d,%d,\"%s\",%.2f,%.2f",
                     orderId,
                     userId,
                     cryptoCurrency.replace("\"", "\"\""),
                     amount,
                     price);
-             pw.println();
         } catch (IOException e) {
 
         }
     }
-    public void writeSellTransaction(int userId, String cryptoCurrency, double amount, double price,int isBuying){
+
+    public void writeTransaction(int userId, String cryptoCurrency, double amount, double price,int isBuying){
         try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_TRANSACTIONS, true))) {
             pw.printf("%d,\"%s\",%.2f,%.2f,%d%n",
                     userId,
@@ -175,9 +174,93 @@ public class CsvManager {
                     amount,
                     price,
                     isBuying);
-             pw.println();
         } catch (IOException e) {
 
+        }
+    }
+
+
+    public String[] getSellOrder(int userId, String cryptoCurrency, double amount, double price){
+        List<String> fileContent = new ArrayList<>();
+        String[] matchedOrder = null;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(CSV_SELL_ORDER_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+
+                if (parts.length == 5) {
+                    String csvUserId = parts[1].replace("\"", "").trim();
+                    String csvCurrencyName = parts[2].replace("\"", "").trim().replaceAll("\"\"", "\"");
+                    String csvAmount = parts[3].replace("\"", "").trim();
+                    String csvPrice = parts[4].replace("\"", "").trim();
+
+                    double doubleCsvAmount = 0;
+                    double doubleCsvPrice = 0;
+                    int intCsvUserId = 0;
+
+                    try {
+                        doubleCsvPrice = Double.parseDouble(csvPrice);
+                        doubleCsvAmount = Double.parseDouble(csvAmount);
+                        intCsvUserId = Integer.parseInt(csvUserId);
+                    } catch (Exception e) {
+                        fileContent.add(line);
+                        continue;
+                    }
+
+                    if (csvCurrencyName.equals(cryptoCurrency) && doubleCsvAmount == amount && doubleCsvPrice < price && intCsvUserId != userId) {
+                        matchedOrder = parts;
+                        continue;
+                    }
+                }
+                fileContent.add(line);
+            }
+        } catch (IOException e) {
+
+        }
+
+        if (matchedOrder != null) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_SELL_ORDER_FILE, false))) {
+                for (String remainingLine : fileContent) {
+                    writer.write(remainingLine);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+
+            }
+        }
+
+        return matchedOrder;
+    }
+
+    public void updateSellerWallet(int userId, double newBalance){
+        List<String> fileContent = new ArrayList<>();
+        boolean isUpdate = false;
+        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_WALLET_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                int currentUserId = Integer.parseInt(data[0]);
+
+                if (currentUserId == userId) {
+                    double currentBalanceFiat = Double.parseDouble(data[1]);
+                    double updatedBalanceFiat = currentBalanceFiat + newBalance;
+                    data[1] = String.format("%.2f", updatedBalanceFiat);
+                    isUpdate = true;
+                }
+
+                fileContent.add(String.join(",", data));
+            }
+        } catch (IOException e) {
+        }
+        if(isUpdate){
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_WALLET_FILE, false))) {
+                for (String line : fileContent) {
+                    writer.write(line);
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+            }
         }
     }
 
