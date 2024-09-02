@@ -24,26 +24,33 @@ public class OrderService {
         userService = new UserService();
     }
 
-    public void placeSellOrder(String[] data, User user, CryptoCurrency crypto) throws Exception {
-        int orderId = rand.nextInt(Integer.MAX_VALUE) + 1;
-        int userId = user.getUserId();
-        String cryptoName = data[0];
-        double amount = Double.parseDouble(data[1]);
-        double price = Double.parseDouble(data[2]);
+    public int placeSellOrder(String[] data, User user, CryptoCurrency crypto) throws Exception {
+        try{
 
-        if(cryptoName.equals("BitCoin") && user.getBitCoinBalance() >= amount && price > crypto.getPrice()) {
-                walletService.deductBitCoinAmount(user.getWallet(), amount);
-                model.setSellOrder(orderId, userId, cryptoName, amount, price);
-                transactionService.saveTransaction(user, cryptoName, amount, price, 0);
-        }else{
-            if(cryptoName.equals("Ethereum") && user.getEthereumBalance() >= amount && price > crypto.getPrice()){
-                walletService.deductEthereumAmount(user.getWallet(), amount);
-                model.setSellOrder(orderId, userId, cryptoName, amount, price);
-                transactionService.saveTransaction(user, cryptoName, amount, price, 0);
+            int orderId = rand.nextInt(Integer.MAX_VALUE) + 1;
+            int userId = user.getUserId();
+            String cryptoName = data[0];
+            double amount = Double.parseDouble(data[1]);
+            double price = Double.parseDouble(data[2]);
+
+            if(cryptoName.equals("BitCoin") && user.getBitCoinBalance() >= amount && price > crypto.getPrice()) {
+                    walletService.deductBitCoinAmount(user.getWallet(), amount);
+                    model.setSellOrder(orderId, userId, cryptoName, amount, price);
+                    transactionService.saveTransaction(user, cryptoName, amount, price, 0);
+                    return 1;
+            }else{
+                if(cryptoName.equals("Ethereum") && user.getEthereumBalance() >= amount && price > crypto.getPrice()){
+                    walletService.deductEthereumAmount(user.getWallet(), amount);
+                    model.setSellOrder(orderId, userId, cryptoName, amount, price);
+                    transactionService.saveTransaction(user, cryptoName, amount, price, 0);
+                    return 1;
+                }
+                else{
+                    throw new Exception("Error");
+                }
             }
-            else{
-                throw new Exception("Error");
-            }
+        }catch (Exception e){
+            return 0;
         }
     }
 
@@ -91,22 +98,28 @@ public class OrderService {
 
 
     public int buyExachange(String crypto, double amount, BitCoin bitCoin, Ethereum ethereum, User user){
-        if (crypto.equals(bitCoin.getName())){
-            double price = bitCoin.getPrice() * amount;
-            if (user.getWalletBalance() > price){
-                userService.balanceDeduct(user, price);
-                addBitCoin(user, amount);
-                return 1;
+        try{
+
+            if (crypto.equals(bitCoin.getName())){
+                double price = bitCoin.getPrice() * amount;
+                if (user.getWalletBalance() > price){
+                    userService.balanceDeduct(user, price);
+                    addBitCoin(user, amount);
+                    return 1;
+                }
             }
-        }
-        if (crypto.equals(ethereum.getName())){
-            double price = ethereum.getPrice() * amount;
-            if (user.getWalletBalance() > price){
-                userService.balanceDeduct(user, price);
-                addEthereum(user, amount);
-                return 1;
+            if (crypto.equals(ethereum.getName())){
+                double price = ethereum.getPrice() * amount;
+                if (user.getWalletBalance() > price){
+                    userService.balanceDeduct(user, price);
+                    addEthereum(user, amount);
+                    return 1;
+                }
             }
+        }catch (Exception e){
+            return 0;
         }
+
         return 0;
     }
 

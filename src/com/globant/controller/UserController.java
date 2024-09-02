@@ -26,8 +26,14 @@ public class UserController {
         String password = data.get(1);
         String email = data.get(2);
         try{
-            userService.register(username, password, email);
-            view.showSuccess("User successfully registered");
+            int result = userService.register(username, password, email);
+            if(result == 1){
+                view.showSuccess("User successfully registered");
+            }else{
+                view.showError("User registration failed");
+            }
+
+
         }catch(Exception e){
             view.showError("Register Error");
         }

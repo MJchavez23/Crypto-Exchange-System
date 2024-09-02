@@ -24,8 +24,14 @@ public class OrderController {
 
     public void buyExchange(User user, BitCoin bitCoin, Ethereum ethereum){
         String[] data = view.buyExchange();
-        String crypto = data[0];
-        double amount = Double.parseDouble(data[1]);
+        String crypto = "";
+        double amount = 0;
+        try{
+            crypto = data[0];
+            amount = Double.parseDouble(data[1]);
+        }catch (Exception e){
+
+        }
         int result = orderService.buyExachange(crypto, amount, bitCoin, ethereum, user);
         if(result == 1){
             view.showSuccess("Buy Exchange Success");
@@ -51,8 +57,12 @@ public class OrderController {
         String[] data = view.placeSellOrderPage(bitCoin.getPrice(), ethereum.getPrice());
         if(Objects.equals(data[0], "BitCoin")){
             try{
-                orderService.placeSellOrder(data, user, bitCoin);
-                view.showSuccess("Place sell order successful");
+                int result = orderService.placeSellOrder(data, user, bitCoin);
+                if(result == 1){
+                    view.showSuccess("Place sell order successful");
+                }else{
+                    view.showError("Place Sell Order Error");
+                }
             }catch(Exception e){
                 view.showError("Place Sell Order Error");
             }
